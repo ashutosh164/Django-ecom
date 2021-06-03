@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card" >
+                  <div class="card-header">
+                    Categories
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><a href="{% url 'store' %}">All</a></li>
+                      {% for category in category %}
+                        <li class="list-group-item"><a href="{% url 'store' %}?category={{ category.name }}">{{ category.name }}</a></li>
+                      {% endfor %}
+
+                  </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    {% for item in item %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img src="{{ item.image.url }}" class="image-thumbail" alt="Photos not found">
+                            <div class="card-body">
+                                <small><p>Category:{{ item.category.name }}</p></small>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
