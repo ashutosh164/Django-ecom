@@ -16,3 +16,13 @@ def store(request):
         'item': item
     }
     return render(request, 'store.html', context)
+
+
+def item_detail(request, pk):
+    item = Item.objects.get(id=pk)
+
+    context = {
+        'item': item
+    }
+
+    return render(request, 'details.html', context)

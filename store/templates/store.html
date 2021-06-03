@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <small><p>Category:{{ item.category.name }}</p></small>
                             </div>
-
+                            <a href="{% url 'detail' item.id  %}" class="btn btn-outline-info btn-sm m-1">View</a>
                         </div>
                     </div>
                     {% endfor %}

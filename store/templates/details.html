@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col">
+            <a href="{% url 'store' %}" class="btn btn-dark my-3">Go back</a>
+            <div style="height:90vh;">
+                <img style="max--width: 100%; max_height: 100%;"
+                     src="{{ item.image.url }}" alt="Image not found">
+                <p>{{ item.title }}</p>
+                <p>{{ item.price }}</p>
+                <p>{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
