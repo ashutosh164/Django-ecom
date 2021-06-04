@@ -26,3 +26,7 @@ def item_detail(request, pk):
     }
 
     return render(request, 'details.html', context)
+
+
+
+
