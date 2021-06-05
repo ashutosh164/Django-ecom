@@ -21,11 +21,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link">Store <span class="sr-only">(current)</span></a>
+        <a href="{% url 'store' %}" class="nav-link">Store <span class="sr-only">(current)</span></a>
       </li>
     </ul>
       <div class="form-inline my-2 my-lg-0">
-          <a  class="btn btn-warning">Login</a>
+          <a href="#" class="btn btn-warning">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-warning">Register</a>
           <a  class="btn btn-warning">Logout</a>
 
           <p id="cart-total">0</p>
