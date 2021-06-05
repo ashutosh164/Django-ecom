@@ -31,8 +31,6 @@ def item_detail(request, pk):
     return render(request, 'details.html', context)
 
 
-<<<<<<< HEAD
-=======
 def signup(request):
     form = UserRegistrationsForm()
     if request.method == 'POST':
@@ -49,6 +47,5 @@ def signup(request):
 
 
 
->>>>>>> ecom
 
 
