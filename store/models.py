@@ -13,6 +13,7 @@ class Category(models.Model):
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
+    discount_price = models.FloatField(blank=True, null=True)
     image = models.ImageField(upload_to='items/', null=True)
     description = models.CharField(max_length=200, default='', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
