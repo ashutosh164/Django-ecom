@@ -25,9 +25,13 @@
                         <div class="card my-2">
                             <img src="{{ item.image.url }}" class="image-thumbail" alt="Photos not found">
                             <div class="card-body">
-                                <small><p>Category:{{ item.category.name }}</p></small>
+                                {% if item.discount_price %}
+                                    <h2>Rs: {{ item.discount_price }}</h2>
+                                {% else %}
+                                    <h2>Rs: {{ item.price }}</h2>
+                                {% endif %}
                             </div>
-                            <a href="{% url 'detail' item.id  %}" class="btn btn-outline-info btn-sm m-1">View</a>
+                            <a href="{% url 'detail' item.id  %}" class="btn btn-outline-info btn-sm m-1">{{ item.title }}</a>
                         </div>
                     </div>
                     {% endfor %}
