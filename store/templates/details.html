@@ -16,10 +16,12 @@
                 {% else %}
                     <h2>Rs: {{ item.price }}</h2>
                 {% endif %}
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" name="product" data-product={{item.id}} class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                </form>
+<!--                <form action="{{item.get_absolutely_url}}" method="POST">-->
+<!--                    {% csrf_token %}-->
+<!--                    <button type="submit" name="product" data-product={{item.id}} class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>-->
+<!--                </form>-->
+<!--&lt;!&ndash;                {{ item.id }}&ndash;&gt;-->
+<!--                <a href="{{item.get_absolutely_url}}" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</a>-->
                 <p>{{ item.description }}</p>
             </div>
         </div>

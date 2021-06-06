@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Item, OrderItem, Order, Category
 from .forms import UserRegistrationsForm
 from django.contrib import messages
@@ -44,7 +44,20 @@ def signup(request):
     return render(request, 'register.html', context)
 
 
-
+def add_to_cart(request, pk):
+    item = get_object_or_404(Item, id=pk)
+    order_item = OrderItem.objects.create(item=item)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        # check if the order item is in the order
+        if order.item.filter(item__id=item.id).exists():
+            order_item.quantity += 1
+            order_item.save()
+    else:
+        order = Order.objects.create(user=request.user)
+        order.item.add(order_item)
+    return redirect('store')
 
 
 

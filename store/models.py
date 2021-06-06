@@ -1,6 +1,7 @@
 from django.db import models
 from PIL import Image
 from django.contrib.auth.models import User
+from django.shortcuts import reverse
 
 
 class Category(models.Model):
@@ -31,10 +32,14 @@ class Item(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+    # def get_absolutely_url(self):
+    #     return reverse('detail', kwargs={'id': self.id})
+
 
 # ORDER ITEM AFTER ADD IN CART
 class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
 
 
 # USE ORDER EVERY TIME USER ADD ITEM TO THE CART BUT NOT ORDERED
@@ -45,6 +50,6 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user
+        return f"{self.user} -- {self.item}"
 
 
