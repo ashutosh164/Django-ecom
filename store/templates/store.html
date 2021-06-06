@@ -32,8 +32,9 @@
                                 {% endif %}
                             </div>
                             <a href="{% url 'detail' item.id  %}" class="btn btn-outline-info btn-sm m-1">{{ item.title }}</a>
-                            {% if user.request %}
+                            {% if request.user %}
                                 <a href="{% url 'add_to_cart' item.id  %}" class="btn btn-outline-info btn-sm m-1">Add to Cart</a>
+                                <a href="{% url 'remove_cart' item.id  %}" class="btn btn-outline-danger btn-sm m-1">Remove From Cart</a>
                             {% endif %}
                         </div>
                     </div>
