@@ -25,11 +25,15 @@
       </li>
     </ul>
       <div class="form-inline my-2 my-lg-0">
-          <a href="#" class="btn btn-warning">Login</a>
-          <a href="{% url 'register' %}" class="btn btn-warning">Register</a>
-          <a  class="btn btn-warning">Logout</a>
+          {% if user.request %}
+              <span class="btn btn-info">Hello, {{ request.user }} </span>
+              <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+              <p id="cart-total">0</p>
+          {% else %}
+              <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+              <a href="{% url 'register' %}" class="btn btn-warning">Register</a>
+          {% endif %}
 
-          <p id="cart-total">0</p>
 
       </div>
 

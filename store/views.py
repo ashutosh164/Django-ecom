@@ -31,6 +31,19 @@ def item_detail(request, pk):
     return render(request, 'details.html', context)
 
 
+def userlogin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('store')
+        else:
+            messages.info(request, 'Username Or Password is incorrect')
+    return render(request, 'login.html')
+
+
 def signup(request):
     form = UserRegistrationsForm()
     if request.method == 'POST':
@@ -39,9 +52,14 @@ def signup(request):
             user = form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, 'account was created for ' + username)
-
+            return redirect('login')
     context = {'form': form}
     return render(request, 'register.html', context)
+
+
+def userlogout(request):
+    logout(request)
+    return redirect('login')
 
 
 def add_to_cart(request, pk):
