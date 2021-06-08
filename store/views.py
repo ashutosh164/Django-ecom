@@ -3,7 +3,7 @@ from .models import Item, OrderItem, Order, Category
 from .forms import UserRegistrationsForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.utils import timezone
+from django.contrib import messages
 
 
 def store(request):
@@ -73,12 +73,16 @@ def add_to_cart(request, pk):
         if order.item.filter(item__id=item.id).exists():
             order_item.quantity += 1
             order_item.save()
+            messages.info(request, 'Tis item quantity wsa updated..')
         else:
             order.item.add(order_item)
+            messages.info(request, 'This item was added to your cart')
+            return redirect('store')
     else:
         # order_date =timezone.now()
         order = Order.objects.create(user=request.user)
         order.item.add(order_item)
+        messages.info(request, 'This item was added to your cart')
     return redirect('store')
 
 
@@ -89,33 +93,24 @@ def remove_cart(request, pk):
         order = order_qs[0]
         # check if the order item is in the order
         if order.item.filter(item__id=item.id).exists():
-            order_item = OrderItem.objects.filter(item=item, user=request.user, ordered=False)[0]
-            order.item.remove(order_item)
+            order_item = OrderItem.objects.filter(
+                item=item,
+                user=request.user,
+                ordered=False
+            )[0]
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+                messages.info(request, "This item quantity was updated.")
+            else:
+                order_item.delete()
+                messages.info(request, "This item was removed from your cart.")
+            return redirect('store')
         else:
+            messages.info(request, "This item was not in your cart")
             return redirect('store')
     else:
+        messages.info(request, "You do not have an active order")
         return redirect('store')
 
-    return redirect('store')
 
-
-# def remove_cart(request, pk):
-#     item = get_object_or_404(Item, id=pk)
-#     order_item, created = OrderItem.objects.get_or_create(item=item, user=request.user, ordered=False)
-#     order_qs = Order.objects.filter(user=request.user, ordered=False)
-#     if order_qs.exists():
-#         order = order_qs[0]
-#         # check if the order item is in the order
-#         if order.item.filter(item__id=item.id).exists():
-#             order_item.quantity -= 1
-#             order_item.save()
-#             if order_item.quantity == 0:
-#                 order_item.delete()
-#
-#         else:
-#             order.item.remove(order_item)
-#     else:
-#         # order_date =timezone.now()
-#         order = Order.objects.create(user=request.user)
-#         order.item.add(order_item)
-#     return redirect('store')
