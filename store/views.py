@@ -32,7 +32,7 @@ def item_detail(request, pk):
     return render(request, 'details.html', context)
 
 
-def userlogin(request):
+def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -58,7 +58,7 @@ def signup(request):
     return render(request, 'register.html', context)
 
 
-def userlogout(request):
+def user_logout(request):
     logout(request)
     return redirect('login')
 
