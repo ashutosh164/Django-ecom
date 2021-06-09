@@ -21,7 +21,8 @@
         </table>
         <div class="box-element">
             <div class="cart-row">
-                <div style="flex:2"></div>
+                <div style="flex:1"><b>No.</b></div>
+                <div style="flex:2"><b>Image</b></div>
                 <div style="flex:2"><b>Item</b></div>
                 <div style="flex:1"><b>Price</b></div>
                 <div style="flex:1"><b>Quantity</b></div>
@@ -29,6 +30,7 @@
             </div>
             {% for order_item in object.item.all %}
             <div class="cart-row">
+                <div style="flex:1">{{ forloop.counter }}</div>
                 <div style="flex:2"><img class="row-image" src="{{ order_item.item.image.url }}" alt="Not find"></div>
                 <div style="flex:2">{{order_item.item.title }}</div>
                 <div style="flex:1">Rs: {{order_item.item.price|floatformat:2}}
