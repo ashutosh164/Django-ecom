@@ -26,7 +26,7 @@
                             <img src="{{ item.image.url }}" class="image-thumbail" alt="Photos not found">
                             <div class="card-body">
                                 {% if item.discount_price %}
-                                    <h2>Rs: {{ item.discount_price }}</h2>
+                                    <h3>Rs: {{ item.discount_price }}<spam class="badge badge-primary">New</spam></h3>
                                 {% else %}
                                     <h2>Rs: {{ item.price }}</h2>
                                 {% endif %}
