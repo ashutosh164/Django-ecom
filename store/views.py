@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Item, OrderItem, Order, Category
 from .forms import UserRegistrationsForm
-from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.views.generic import DetailView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def store(request):
@@ -112,5 +114,25 @@ def remove_cart(request, pk):
     else:
         messages.info(request, "You do not have an active order")
         return redirect('store')
+
+
+class OrderSummaryView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+        except ObjectDoesNotExist:
+            messages.error(self.request, 'You do not have an active order')
+            return redirect('/')
+        return render(self.request, 'order_summary.html', {'object':order})
+
+
+
+
+
+
+
+
+
+
 
 

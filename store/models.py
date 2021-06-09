@@ -46,6 +46,12 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
 
+    def get_total(self):
+        return self.quantity * self.item.price
+
+    def get_total_discount_price(self):
+        return self.quantity * self.item.discount_price
+
 
 # USE ORDER EVERY TIME USER ADD ITEM TO THE CART BUT NOT ORDERED
 class Order(models.Model):

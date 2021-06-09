@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import store, item_detail, signup,\
-    add_to_cart, user_login, user_logout,remove_cart
+    add_to_cart, user_login, user_logout,remove_cart, OrderSummaryView
 
 urlpatterns = [
     path('', store, name='store'),
@@ -26,4 +26,5 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('add_to_cart/<int:pk>/', add_to_cart, name='add_to_cart'),
     path('remove_cart/<int:pk>/', remove_cart, name='remove_cart'),
+    path('order_summary/', OrderSummaryView.as_view(), name='order_summary'),
 ]
