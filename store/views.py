@@ -134,16 +134,14 @@ def remove_item(request, pk):
         # check if the order item is in the order
         if order.item.filter(item__id=item.id).exists():
             order_item = OrderItem.objects.filter(item=item, user=request.user,ordered=False)[0]
-            order_item.quantity -= 1
-            order_item.save()
-            messages.info(request, 'This item quantity was updated')
-            return redirect('order_summary')
-        else:
-            messages.info(request, 'this item is not in your cart')
-            return redirect('order_summary')
-    else:
-        messages.info(request, 'you do not have an active order')
-        return redirect('order_summary')
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+                messages.info(request, 'This item quantity was decreases')
+                return redirect('order_summary')
+            else:
+                messages.info(request, 'please go to the store to remove this item')
+                return redirect('order_summary')
 
 
 
