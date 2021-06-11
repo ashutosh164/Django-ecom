@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from .views import store, item_detail, signup,\
     add_to_cart, user_login, user_logout,remove_cart, OrderSummaryView, \
-    remove_item, add_item
+    remove_item, add_item, delete_item
 
 urlpatterns = [
     path('', store, name='store'),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('order_summary/', OrderSummaryView.as_view(), name='order_summary'),
     path('remove_item/<int:pk>/', remove_item, name='remove_item'),
     path('add_item/<int:pk>/', add_item, name='add_item'),
+    path('delete_item/<int:pk>/', delete_item, name='delete_item'),
 ]

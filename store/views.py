@@ -162,6 +162,14 @@ def add_item(request, pk):
                 return redirect('order_summary')
 
 
-
-
-
+def delete_item(request, pk):
+    item = get_object_or_404(Item, id=pk)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        # check if the order item is in the order
+        if order.item.filter(item__id=item.id).exists():
+            order_item = OrderItem.objects.filter(item=item, user=request.user,ordered=False)[0]
+            order_item.delete()
+            messages.info(request, 'Your item was remove from cart')
+            return redirect('order_summary')
