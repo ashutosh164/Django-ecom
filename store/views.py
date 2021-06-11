@@ -137,11 +137,14 @@ def remove_item(request, pk):
             if order_item.quantity > 1:
                 order_item.quantity -= 1
                 order_item.save()
-                messages.info(request, 'This item quantity was decreases')
-                return redirect('order_summary')
+                messages.info(request, 'this item quantity was decreases')
             else:
-                messages.info(request, 'please go to the store to remove this item')
-                return redirect('order_summary')
+                order_item.delete()
+                messages.info(request, 'This item was deleted from our cart')
+            return redirect('order_summary')
+        else:
+            messages.info(request, 'This item was not in your cart')
+            return redirect('order_summary')
 
 
 def add_item(request, pk):
