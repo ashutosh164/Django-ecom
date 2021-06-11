@@ -42,8 +42,13 @@
                 <div style="flex:1">
                     <p class="quantity">{{order_item.quantity}}</p>
                     <div class="quantity">
+<<<<<<< HEAD
                         <img class="chg-quantity" src="{% static 'image/arro.w-up.png' %}">
                         <img class="chg-quantity" src="{% static 'image/arrow-down.png' %}">
+=======
+                        <img class="chg-quantity" src="{% static 'image/arrow-up.png' %}">
+                        <a href="{% url 'remove_item' order_item.item.id %}"><img class="chg-quantity" src="{% static 'image/arrow-down.png' %}"></a>
+>>>>>>> ecom
                     </div>
                 </div>
                 {% if order_item.item.discount_price %}
