@@ -42,7 +42,7 @@
                 <div style="flex:1">
                     <p class="quantity">{{order_item.quantity}}</p>
                     <div class="quantity">
-                        <img class="chg-quantity" src="{% static 'image/arrow-up.png' %}">
+                        <a href="{% url 'add_item' order_item.item.id %}"><img class="chg-quantity" src="{% static 'image/arrow-up.png' %}"></a>
                         <a href="{% url 'remove_item' order_item.item.id %}"><img class="chg-quantity" src="{% static 'image/arrow-down.png' %}"></a>
                     </div>
                 </div>
