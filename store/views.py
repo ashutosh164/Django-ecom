@@ -176,3 +176,7 @@ def delete_item(request, pk):
             order_item.delete()
             messages.info(request, 'Your item was remove from cart')
             return redirect('order_summary')
+
+
+def checkout(request):
+    return render(request, 'checkout.html')
