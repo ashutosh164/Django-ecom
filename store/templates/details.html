@@ -12,7 +12,7 @@
                      src="{{ item.image.url }}" alt="Image not found">
                 <p>{{ item.title }}</p>
                 {% if item.discount_price %}
-                    <h2>Rs: {{ item.discount_price }}</h2>
+                    <h2>Rs: {{ item.discount_price }}<spam class="badge badge-primary">New</spam></h2>
                 {% else %}
                     <h2>Rs: {{ item.price }}</h2>
                 {% endif %}
