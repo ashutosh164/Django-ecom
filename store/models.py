@@ -67,6 +67,7 @@ class Order(models.Model):
     item = models.ManyToManyField(OrderItem)
     created_on = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
+    billing_address = models.ForeignKey('ShippingAddress', on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user} -- {self.item}"
