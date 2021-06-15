@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Item, OrderItem, Order, Category
-from .forms import UserRegistrationsForm
+from .forms import UserRegistrationsForm, AddressForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -179,4 +179,7 @@ def delete_item(request, pk):
 
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    form = AddressForm()
+
+    context = {'form':form}
+    return render(request, 'checkout.html', context)
