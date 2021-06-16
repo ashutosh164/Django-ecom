@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cart %}
 {% block body %}
 
 <div class="row">
@@ -67,8 +68,8 @@
 
             </div>
             {% endfor %}
-            <h5>Item: {{ order.get_cart_items }}</h5>
-            <h5>Total: {{ order.get_cart_total|floatformat:2 }}</h5>
+            <h5>Item: <b>{{ request.user|cart_item_count }}</b></h5>
+            <h5>Total: <strong>Rs: {{ order.get_total|floatformat:2 }}</strong></h5>
 
         </div>
 

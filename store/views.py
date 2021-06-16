@@ -179,7 +179,11 @@ def delete_item(request, pk):
 
 
 def checkout(request):
+    order = Order.objects.get(user=request.user, ordered=False)
     form = AddressForm()
 
-    context = {'form':form}
+    context = {
+        'form':form,
+        'order':order
+    }
     return render(request, 'checkout.html', context)

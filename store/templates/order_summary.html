@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cart %}
 {% block body %}
 
 
@@ -12,7 +13,7 @@
         <br>
         <table class="table">
             <tr>
-                <th><h5>Items: <strong>{{ object.get_cart_items }}</strong></h5></th>
+                <th><h5>Items: <strong>{{ request.user|cart_item_count }}</strong></h5></th>
                 <th><h5>Total: <strong>Rs: {{ object.get_total|floatformat:2 }}</strong></h5></th>
                 <th>
                     <a style="float:right;margin:5px" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
