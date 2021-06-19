@@ -83,11 +83,13 @@ class ShippingAddress(models.Model):
     customer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True, null=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)
     name = models.CharField(max_length=100, null=True)
+    email = models.EmailField(max_length=100, null=True)
     address = models.CharField(max_length=200,null=True)
     city = models.CharField(max_length=200,null=True)
     state = models.CharField(max_length=200,null=True)
     dist = models.CharField(max_length=200,null=True)
     zipcode = models.CharField(max_length=200,null=True)
+    country = models.CharField(max_length=100,null=True)
     phone = models.CharField(max_length=15,null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 

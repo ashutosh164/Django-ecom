@@ -10,40 +10,43 @@
                 {% csrf_token %}
                 <div id="user-info">
                     <div class="form-field">
-                        <input required class="form-control" type="text" name="name" placeholder="Name">
+                        <input required class="form-control" type="text" name="{{ form.name }}" placeholder="Name">
                     </div>
                     <div class="form-field">
-                        <input required class="form-control" type="text" name="email" placeholder="Email">
+                        <input required class="form-control" type="text" name="{{ form.email }}" placeholder="Email">
                     </div>
                 </div>
                 <hr>
                 <div id="shipping-info">
                     <p>Shipping Information:  </p>
                     <div class="form-filed">
-                        <input class="form-container" type="text" name="address" placeholder="Address">
+                        <input class="form-container" type="text" name="{{ form.address }}" placeholder="Address">
                     </div>
                     <hr>
                      <div class="form-filed">
-                        <input class="form-container" type="text" name="city" placeholder="City">
+                        <input class="form-container" type="text" name="{{ form.city }}" placeholder="City">
                     </div>
                     <hr>
                      <div class="form-filed">
-                        <input class="form-container" type="text" name="dist" placeholder="Dist">
+                        <input class="form-container" type="text" name="{{ form.dist }}" placeholder="Dist">
                     </div>
                     <hr>
                      <div class="form-filed">
-                        <input class="form-container" type="text" name="state" placeholder="State">
+                        <input class="form-container" type="text" name="{{ form.state }}" placeholder="State">
                     </div>
                     <hr>
                      <div class="form-filed">
-                        <input class="form-container" type="text" name="Zipcode" placeholder="Zipcode">
+                        <input class="form-container" type="text" name="{{ form.zipcode }}" placeholder="Zipcode">
 
                     </div>
                     <hr>
                      <div class="form-filed">
-                        <input class="form-container" type="text" name="country" placeholder="Country">
-
-                    </div>
+                        <input class="form-container" type="text" name="{{ form.phone }}" placeholder="Phone">
+                     </div>
+                    <hr>
+                     <div class="form-filed">
+                        <input class="form-container" type="text" name="{{ form.country }}" placeholder="Country">
+                     </div>
 
                 </div>
                 <hr>
