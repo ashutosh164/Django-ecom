@@ -10,7 +10,7 @@ class UserRegistrationsForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
-class AddressForm(forms.Form):
+class AddressForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress
         fields = ['name', 'email', 'address', 'city', 'dist', 'state', 'zipcode', 'phone', 'country']

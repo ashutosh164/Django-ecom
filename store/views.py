@@ -181,7 +181,13 @@ def delete_item(request, pk):
 def checkout(request):
     order = Order.objects.get(user=request.user, ordered=False)
     form = AddressForm()
-
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your shipping address has been saved. Your item will be delivery at this address')
+        else:
+            messages.error(request, 'something is missing please check again')
     context = {
         'form':form,
         'order':order
