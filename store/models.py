@@ -82,6 +82,7 @@ class Order(models.Model):
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True, null=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)
+    name = models.CharField(max_length=100, null=True)
     address = models.CharField(max_length=200,null=True)
     city = models.CharField(max_length=200,null=True)
     state = models.CharField(max_length=200,null=True)
@@ -91,4 +92,5 @@ class ShippingAddress(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.address
+        return f'{self.name}--{self.address}'
+
