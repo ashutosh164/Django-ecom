@@ -121,7 +121,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
         except ObjectDoesNotExist:
-            messages.error(self.request, 'You do not have an active order')
+            messages.warning(self.request, 'You do not have an active order')
             return redirect('/')
         return render(self.request, 'order_summary.html', {'object':order})
 
@@ -180,16 +180,19 @@ def delete_item(request, pk):
 
 def checkout(request):
     order = Order.objects.get(user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
     form = AddressForm()
     if request.method == 'POST':
         form = AddressForm(request.POST)
         if form.is_valid():
             form.save()
+
             messages.success(request, 'Your shipping address has been saved. Your item will be delivery at this address')
         else:
             messages.error(request, 'something is missing please check again')
     context = {
         'form':form,
-        'order':order
+        'order':order,
+        'order_qs':order_qs
     }
     return render(request, 'checkout.html', context)
