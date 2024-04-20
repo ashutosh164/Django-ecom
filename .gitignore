@@ -1,3 +1,5 @@
 items
 manage.py
 migrations
+db.sqlite3
+**/__pycache__/
