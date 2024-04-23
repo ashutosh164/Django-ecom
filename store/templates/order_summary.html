@@ -50,8 +50,10 @@
                     </div>
                 </div>
                 {% if order_item.item.discount_price %}
-                    <div style="flex:1">Rs: {{order_item.get_total_discount_price}}
-                        <spam class="badge badge-primary">Saving: {{order_item.get_amount_save}}</spam>
+                    <div style="flex:1">Rs: {{order_item.total_item_price_after_discount}}
+                        <spam class="badge badge-primary">Saving: {{order_item.item.discount_price}}</spam>
+<!--                        <spam class="badge badge-primary">Saving: {{order_item.total_discount_for_item}}</spam>-->
+
                     </div>
                 {% else %}
                     <div style="flex:1">Rs: {{order_item.get_total}}</div>

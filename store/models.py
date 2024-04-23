@@ -55,11 +55,22 @@ class OrderItem(models.Model):
     def get_amount_save(self):
         return self.get_total() - self.get_total_discount_price()
 
-    def get_final_price(self):
-        if self.item.discount_price:
-            return self.get_total_discount_price()
-        return self.get_total()
+    # def get_final_price(self):
+    #     if self.item.discount_price:
+    #         return self.get_total_discount_price()
+    #     else:
+    #         return self.get_total()
 
+    def get_final_price(self):
+        price = self.quantity * self.item.price
+        if self.item.discount_price:
+            return price - self.item.discount_price
+        else:
+            price
+    def total_item_price_after_discount(self):
+        price = self.item.price * self.quantity
+        total_discount = price - self.item.discount_price
+        return total_discount
 
 # USE ORDER EVERY TIME USER ADD ITEM TO THE CART BUT NOT ORDERED
 class Order(models.Model):
