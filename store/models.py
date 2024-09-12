@@ -11,6 +11,19 @@ class Category(models.Model):
         return self.name
 
 
+class Size(models.Model):
+    SIZE_CHOICES = [
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('XL', 'Extra Large'),
+    ]
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES, unique=True)
+
+    def __str__(self):
+        return self.get_size_display()
+
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
@@ -18,6 +31,7 @@ class Item(models.Model):
     image = models.ImageField(upload_to='items/', null=True)
     description = models.CharField(max_length=200, default='', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    sizes = models.ManyToManyField(Size, related_name='items')
 
     def __str__(self):
         return self.title
@@ -67,10 +81,12 @@ class OrderItem(models.Model):
             return price - self.item.discount_price
         else:
             price
+
     def total_item_price_after_discount(self):
         price = self.item.price * self.quantity
         total_discount = price - self.item.discount_price
         return total_discount
+
 
 # USE ORDER EVERY TIME USER ADD ITEM TO THE CART BUT NOT ORDERED
 class Order(models.Model):
